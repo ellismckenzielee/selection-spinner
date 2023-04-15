@@ -35,7 +35,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: rotation 0.4s linear 5;
 }
 
 #spinner-center {
@@ -46,13 +45,3 @@ main {
     z-index: 1;
 }
 
-.segment {
-  background-color: greenyellow;
-  position: absolute;
-  border-radius: 100%;
-  height: 90%;
-  width: 90%;
-  background-image:
-        linear-gradient(126deg, transparent 50%, crimson 50%),
-        linear-gradient(90deg, crimson 50%, transparent 50%);
-}
