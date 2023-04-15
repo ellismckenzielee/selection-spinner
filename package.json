@@ -1,0 +1,12 @@
+{
+  "name": "selection-spinner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ellismckenzielee/selection-spinner.git",
+  "author": "Ellis Lee <ellismckenzielee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
