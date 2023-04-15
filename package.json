@@ -5,8 +5,20 @@
   "repository": "git@github.com:ellismckenzielee/selection-spinner.git",
   "author": "Ellis Lee <ellismckenzielee@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "yarn": "^1.22.19"
+  },
   "devDependencies": {
-    "jest": "^29.5.0"
+    "eslint": "^8.38.0",
+    "husky": "^8.0.0",
+    "jest": "^29.5.0",
+    "stylelint": "^15.4.0",
+    "pinst": "^3.0.0"
+  },
+  "scripts": {
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "test": "jest"
   }
 }
