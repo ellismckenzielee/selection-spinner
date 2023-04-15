@@ -16,6 +16,25 @@ main {
 .spinner-container {
   width: 20%;
   height: 10px;
+  position: relative;
   background-color: white;
   padding-bottom: 20%;
+}
+
+.spinner {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: crimson;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner-center {
+    width: 10%;
+    height: 10%;
+    background-color: black;
+    border-radius: 50%;
 }
