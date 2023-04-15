@@ -1,3 +1,21 @@
 body {
-  background-color: red;
+  background-color: teal;
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-container {
+  width: 20%;
+  height: 10px;
+  background-color: white;
+  padding-bottom: 20%;
 }
