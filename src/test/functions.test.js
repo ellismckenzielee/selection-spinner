@@ -1,4 +1,4 @@
-const { calculateAngle } = require('../utils/arcs');
+const { calculateAngle, calculateEndCoords } = require('../utils/arcs');
 
 describe('testing spinner functions', () => {
   test('trivial test - is jest running?', () => {
@@ -35,6 +35,24 @@ describe('testing spinner functions', () => {
         const expectedAngle = 32.72;
         const result = calculateAngle(numberOfSegments);
         expect(result).toBe(expectedAngle);
+      });
+    });
+    describe('calculateEndCoords', () => {
+      test('should return an object', () => {
+        const angle = 45;
+        const expectedType = 'object';
+        const result = calculateEndCoords(angle);
+        expect(typeof result).toBe(expectedType);
+      });
+      test('return object should have x and y keys with numeric values', () => {
+        const angle = 45;
+        const expectedCoordinates = {
+          x: expect.any(Number),
+          y: expect.any(Number),
+        };
+        const result = calculateEndCoords(angle);
+
+        expect(result).toMatchObject(expectedCoordinates);
       });
     });
   });
