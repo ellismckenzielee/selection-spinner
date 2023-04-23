@@ -5,6 +5,7 @@
   "repository": "git@github.com:ellismckenzielee/selection-spinner.git",
   "author": "Ellis Lee <ellismckenzielee@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "yarn": "^1.22.19"
   },
@@ -21,6 +22,6 @@
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
-    "test": "jest"
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)"
   }
 }

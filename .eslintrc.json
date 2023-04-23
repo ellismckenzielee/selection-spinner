@@ -12,6 +12,9 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "max-len": ["error", {
+            "code": 200
+        }]
     },
     "plugins": ["jest"]
     

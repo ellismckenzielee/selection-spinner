@@ -1,4 +1,4 @@
-const { calculateAngle, calculateEndCoords } = require('../utils/arcs');
+import { calculateAngle, calculateEndCoords } from '../utils/arcs';
 
 describe('testing spinner functions', () => {
   test('trivial test - is jest running?', () => {

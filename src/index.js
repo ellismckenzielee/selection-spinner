@@ -1,11 +1,7 @@
 const spinner = document.getElementById('spinner');
 const spinnerCenter = document.getElementById('spinner-center');
-// const numberOfSegments = 4;
+
 let rotation = 200;
-// const colors = ['yellow', 'black', 'green', 'teal'];
-// const create_segments = (spinner, numberOfSegments) => {
-//   const increment = 360 / numberOfSegments;
-// };
 
 const setup = () => {
   spinnerCenter.addEventListener('click', () => {
