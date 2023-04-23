@@ -54,6 +54,52 @@ describe('testing spinner functions', () => {
 
         expect(result).toMatchObject(expectedCoordinates);
       });
+      test('return object should have correct coordinates for 0 deg', () => {
+        const angle = 0;
+        const expectedCoordinates = {
+          x: 50,
+          y: 5,
+        };
+        const result = calculateEndCoords(angle);
+
+        expect(result).toMatchObject(expectedCoordinates);
+      });
+      test('return object should have correct coordinates for 360 deg', () => {
+        const angle = 360;
+        const expectedCoordinates = {
+          x: 50,
+          y: 5,
+        };
+        const result = calculateEndCoords(angle);
+        expect(result).toMatchObject(expectedCoordinates);
+      });
+      test('return object should have correct coordinates for 90 deg', () => {
+        const angle = 90;
+        const expectedCoordinates = {
+          x: 95,
+          y: 50,
+        };
+        const result = calculateEndCoords(angle);
+        expect(result).toMatchObject(expectedCoordinates);
+      });
+      test('return object should have correct coordinates for 180 deg', () => {
+        const angle = 180;
+        const expectedCoordinates = {
+          x: 50,
+          y: 95,
+        };
+        const result = calculateEndCoords(angle);
+        expect(result).toMatchObject(expectedCoordinates);
+      });
+      test('return object should have correct coordinates for 270 deg', () => {
+        const angle = 270;
+        const expectedCoordinates = {
+          x: 5,
+          y: 50,
+        };
+        const result = calculateEndCoords(angle);
+        expect(result).toMatchObject(expectedCoordinates);
+      });
     });
   });
 });
