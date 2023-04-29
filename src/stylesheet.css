@@ -46,37 +46,10 @@ main {
 }
 
 
-#segment-1 {
+#segment {
   width: 100%;
   height: 100%;
   position: absolute;
   transform: rotate(0deg);
-  fill: green;
-}
-
-#segment-2 {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform: rotate(90deg);
-  fill: pink;
-
-}
-
-#segment-3 {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform: rotate(270deg);
-  fill: yellowgreen;
-
-}
-
-#segment-4 {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform: rotate(180deg);
-  fill: white;
 }
 
