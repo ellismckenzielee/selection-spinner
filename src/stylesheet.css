@@ -54,3 +54,8 @@ main {
   transform: rotate(0deg);
 }
 
+#segment-text {
+  font-family: arial;
+  font-size: 8px;
+  fill: black;
+}
