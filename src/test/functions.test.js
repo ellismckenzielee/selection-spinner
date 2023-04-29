@@ -100,6 +100,15 @@ describe('testing spinner functions', () => {
         const result = calculateEndCoords(angle);
         expect(result).toMatchObject(expectedCoordinates);
       });
+      test('coordinates should be rounded to two decimal places', () => {
+        const angle = 19;
+        const expectedCoordinates = {
+          x: 64.65,
+          y: 7.45,
+        };
+        const result = calculateEndCoords(angle);
+        expect(result).toMatchObject(expectedCoordinates);
+      });
     });
   });
 });

@@ -2,7 +2,10 @@ export const calculateAngle = (numberOfSegments) => Math.floor((360 / numberOfSe
 
 export const calculateEndCoords = (angle) => {
   const radius = 45;
-  const x = Math.round(radius * Math.sin(Math.PI * (angle / 180)));
-  const y = Math.round(radius * Math.cos(Math.PI * (angle / 180)));
-  return { x: 50 + x, y: 50 - y };
+  const x = 50 + (radius * Math.sin(Math.PI * (angle / 180)));
+  const y = 50 - (radius * Math.cos(Math.PI * (angle / 180)));
+  return {
+    x: Math.round(x * 100) / 100,
+    y: Math.round(y * 100) / 100,
+  };
 };
