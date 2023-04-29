@@ -9,7 +9,7 @@ const setup = () => {
   spinnerCenter.addEventListener('click', () => {
     const newRotation = rotation + 100;
     rotation = newRotation;
-    spinner.style.transform = `rotate(${2000}deg)`;
+    spinner.style.transform = `rotate(${newRotation}deg)`;
   });
 };
 
@@ -40,8 +40,6 @@ const addSegments = (angle, coord) => {
     text.style.transform = `rotate(-${angle}deg)`;
     text.textContent = segNum;
     text.setAttribute('id', 'segment-text');
-
-    // text.setAttribute('font-size', 'smaller')
     segment.appendChild(path);
     segment.appendChild(text);
     segment.setAttribute('id', 'segment');

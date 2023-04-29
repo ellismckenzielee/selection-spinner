@@ -20,11 +20,6 @@ main {
   padding-bottom: 20%;
 }
 
-@keyframes rotation {
-  0%      { transform: rotate(0deg); }
-  50%     { transform: rotate(-120deg); }
-  100%    { transform: rotate(-360deg); }
-}
 
 #spinner {
   position: absolute;
