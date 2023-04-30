@@ -24,6 +24,8 @@
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
-    "build": "esbuild src/index.js --bundle --outfile=src/build/out.js"
+    "build": "esbuild src/index.js --bundle --outfile=src/build/out.js",
+    "watch": "esbuild src/index.js --bundle --outfile=src/build/out.js --watch"
+
   }
 }
