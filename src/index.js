@@ -1,4 +1,4 @@
-import { calculateAngle, calculateEndCoords } from './utils/arcs.js';  // eslint-disable-line
+import { calculateAngle, calculateEndCoords } from './utils/arcs';
 
 const spinner = document.getElementById('spinner');
 const spinnerCenter = document.getElementById('spinner-center');

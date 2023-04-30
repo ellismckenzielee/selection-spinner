@@ -10,6 +10,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
+    "esbuild": "^0.17.18",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
@@ -22,6 +23,7 @@
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
-    "test": "yarn node --experimental-vm-modules $(yarn bin jest)"
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
+    "build": "esbuild src/index.js --bundle --outfile=src/build/out.js"
   }
 }

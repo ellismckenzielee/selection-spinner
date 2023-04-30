@@ -16,6 +16,7 @@
             "code": 200
         }]
     },
-    "plugins": ["jest"]
+    "plugins": ["jest"],
+    "ignorePatterns":["out.js"]
     
 }
