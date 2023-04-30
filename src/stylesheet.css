@@ -3,6 +3,7 @@ body {
   box-sizing: border-box;
   height: 100vh;
   margin: 0;
+  overflow: hidden;
 }
 
 main {
@@ -14,10 +15,9 @@ main {
 }
 
 .spinner-container {
-  width: 30%;
+  width: 50%;
   position: relative;
-  background-color: white;
-  padding-bottom: 30%;
+  padding-bottom: 50%;
 }
 
 
@@ -53,4 +53,17 @@ main {
   font-family: arial;
   font-size: 8px;
   fill: black;
+}
+
+#picker {
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+	border-right: 50px solid #000000;
+	border-bottom: 25px solid transparent;
+  z-index: 2;
+  position:absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
 }
