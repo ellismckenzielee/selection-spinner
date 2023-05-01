@@ -1,3 +1,4 @@
+import randomColor from 'randomcolor';
 import { calculateAngle, calculateEndCoords } from '../utils/arcs';
 import getWinner from '../utils/logic';
 
@@ -116,77 +117,104 @@ describe('testing spinner functions', () => {
     describe('getWinner', () => {
       test('should return a string', () => {
         const angle = 90;
-        const choices = ['Waldo'];
+        const choices = [{ title: 'Waldo', color: randomColor() },
+        ];
         const expectedType = 'string';
         expect(expectedType).toBe(typeof getWinner(angle, choices));
       });
       test('should return correct option for single choice', () => {
         const angle = 90;
-        const choices = ['Waldo'];
+        const choices = [{ title: 'Waldo', color: randomColor() },
+        ];
         const expectedWinner = 'Waldo';
         const actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
       });
       test('should return correct option for multiple choices (angle < 180deg)', () => {
         const angle = 75;
-        const choices = ['Waldo', 'Pip'];
+        const choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+        ];
         const expectedWinner = 'Waldo';
         const actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
       });
       test('should return correct option for multiple choices (angle > 180deg)', () => {
         const angle = 190;
-        const choices = ['Waldo', 'Pip'];
+        const choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+        ];
         const expectedWinner = 'Pip';
         const actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
       });
       test('should return correct option for multiple choices (various angles)', () => {
         let angle = 10;
-        let choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        let choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }];
         let expectedWinner = 'Waldo';
         let actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
 
         angle = 100;
-        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
-        expectedWinner = 'Pip';
+        choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }]; expectedWinner = 'Pip';
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
 
         angle = 180;
-        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
-        expectedWinner = 'Polar';
+        choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }]; expectedWinner = 'Polar';
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
 
         angle = 300;
-        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
-        expectedWinner = 'Skye';
+        choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }]; expectedWinner = 'Skye';
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
       });
       test('should return correct option for angles greater than 360', () => {
         let angle = 370;
-        let choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        let choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }];
         let expectedWinner = 'Waldo';
         let actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
 
         angle = 500;
-        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }];
         expectedWinner = 'Pip';
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
 
         angle = 600;
-        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }];
         expectedWinner = 'Polar';
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
 
         angle = 710;
-        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        choices = [{ title: 'Waldo', color: randomColor() },
+          { title: 'Pip', color: randomColor() },
+          { title: 'Polar', color: randomColor() },
+          { title: 'Skye', color: randomColor() }];
         expectedWinner = 'Skye';
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);

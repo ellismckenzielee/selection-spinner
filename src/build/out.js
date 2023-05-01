@@ -410,8 +410,7 @@
   // src/utils/logic.js
   var logic_default = (angle2, choices) => {
     const normalised = Math.floor(angle2 % 360 / 360 * choices.length);
-    console.log(angle2, choices, normalised);
-    return choices[normalised];
+    return choices[normalised].title;
   };
 
   // src/index.js
@@ -431,7 +430,9 @@
       const rotation = Math.random() * 1e4;
       currentAngle -= rotation;
       const winner = logic_default(Math.abs(currentAngle), options);
-      console.log(currentAngle, winner);
+      setTimeout(() => {
+        alert(winner);
+      }, 5e3);
       spinner.style.transform = `rotate(${currentAngle}deg)`;
     });
   };
@@ -457,7 +458,6 @@
     }
   };
   var angle = calculateAngle(numOfSegments);
-  console.log(angle);
   var endCoord = calculateEndCoords(angle);
   addSegments(angle, endCoord);
 })();

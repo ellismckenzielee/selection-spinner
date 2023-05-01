@@ -20,7 +20,9 @@ const setup = () => {
     const rotation = Math.random() * 10000;
     currentAngle -= rotation;
     const winner = getWinner(Math.abs(currentAngle), options);
-    console.log(currentAngle, winner);
+    setTimeout(() => {
+      alert(winner);
+    }, 5000);
     spinner.style.transform = `rotate(${currentAngle}deg)`;
   });
 };
@@ -49,6 +51,5 @@ const addSegments = (angle, coord) => {
 };
 
 const angle = calculateAngle(numOfSegments);
-console.log(angle);
 const endCoord = calculateEndCoords(angle);
 addSegments(angle, endCoord);
