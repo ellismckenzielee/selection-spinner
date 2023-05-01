@@ -1,4 +1,4 @@
 export default (angle, choices) => {
-  const normalised = Math.round((angle / 360) * (choices.length - 1));
+  const normalised = Math.floor(((angle % 360) / 360) * (choices.length));
   return choices[normalised];
 };

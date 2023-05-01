@@ -166,6 +166,31 @@ describe('testing spinner functions', () => {
         actualWinner = getWinner(angle, choices);
         expect(expectedWinner).toBe(actualWinner);
       });
+      test('should return correct option for angles greater than 360', () => {
+        let angle = 370;
+        let choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        let expectedWinner = 'Waldo';
+        let actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+
+        angle = 500;
+        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        expectedWinner = 'Pip';
+        actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+
+        angle = 600;
+        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        expectedWinner = 'Polar';
+        actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+
+        angle = 710;
+        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        expectedWinner = 'Skye';
+        actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+      });
     });
   });
 });

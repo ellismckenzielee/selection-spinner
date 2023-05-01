@@ -1,14 +1,29 @@
 import { calculateAngle, calculateEndCoords } from './utils/arcs';
+import getWinner from './utils/logic';
 
 const spinner = document.getElementById('spinner');
 const spinnerCenter = document.getElementById('spinner-center');
 
-let rotation = 80;
+let rotation = 10;
+
+const numOfSegments = 4;
+
+const options = [
+  'Ellis',
+  'Corey',
+  'Waldo',
+  'Pip',
+  'Polar',
+  'Skye',
+].slice(0, numOfSegments);
 
 const setup = () => {
   spinnerCenter.addEventListener('click', () => {
-    const newRotation = rotation + 100;
+    const newRotation = rotation + 10;
     rotation = newRotation;
+    console.log(rotation);
+    const winner = getWinner(rotation, options);
+    console.log(winner);
     spinner.style.transform = `rotate(${newRotation}deg)`;
   });
 };
@@ -27,25 +42,16 @@ const colours = [
   'lightgray',
 ];
 
-// const options = [
-//   'Ellis',
-//   'Corey',
-//   'Waldo',
-//   'Pip',
-// ];
-
-const numOfSegments = 7;
-
 const addSegments = (angle, coord) => {
   for (let segNum = 0; segNum < numOfSegments; segNum += 1) {
     const segment = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     path.setAttribute('d', `M 50,50 L 50,5 A45,45 1 0,1 ${coord.x},${coord.y} z`);
-    text.setAttribute('x', '10');
-    text.setAttribute('y', '70');
+    text.setAttribute('x', '-90');
+    text.setAttribute('y', '-48');
     text.style.transform = `rotate(-${angle}deg)`;
-    text.textContent = segNum;
+    text.textContent = options[segNum];
     text.setAttribute('id', 'segment-text');
     segment.appendChild(path);
     segment.appendChild(text);
