@@ -15,9 +15,9 @@ main {
 }
 
 .spinner-container {
-  width: 50%;
+  width: 40%;
   position: relative;
-  padding-bottom: 50%;
+  padding-bottom: 40%;
 }
 
 
@@ -39,6 +39,22 @@ main {
     background-color: black;
     border-radius: 50%;
     z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+#spinner-center:hover {
+  width: 10.5%;
+  height: 10.5%;
+  font-weight: bold;
+
 }
 
 
@@ -69,4 +85,10 @@ main {
   top: 50%;
   transform: translate(30%, -50%);
 }
+
+#spin-text {
+  color: white;
+
+}
+
 

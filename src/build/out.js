@@ -45,42 +45,42 @@
         var colorDictionary = {};
         loadColorBounds();
         var colorRanges = [];
-        var randomColor2 = function(options2) {
-          options2 = options2 || {};
-          if (options2.seed !== void 0 && options2.seed !== null && options2.seed === parseInt(options2.seed, 10)) {
-            seed = options2.seed;
-          } else if (typeof options2.seed === "string") {
-            seed = stringToInteger(options2.seed);
-          } else if (options2.seed !== void 0 && options2.seed !== null) {
+        var randomColor2 = function(options) {
+          options = options || {};
+          if (options.seed !== void 0 && options.seed !== null && options.seed === parseInt(options.seed, 10)) {
+            seed = options.seed;
+          } else if (typeof options.seed === "string") {
+            seed = stringToInteger(options.seed);
+          } else if (options.seed !== void 0 && options.seed !== null) {
             throw new TypeError("The seed value must be an integer or string");
           } else {
             seed = null;
           }
           var H, S, B;
-          if (options2.count !== null && options2.count !== void 0) {
-            var totalColors = options2.count, colors = [];
-            for (var i = 0; i < options2.count; i++) {
+          if (options.count !== null && options.count !== void 0) {
+            var totalColors = options.count, colors = [];
+            for (var i = 0; i < options.count; i++) {
               colorRanges.push(false);
             }
-            options2.count = null;
+            options.count = null;
             while (totalColors > colors.length) {
-              var color = randomColor2(options2);
+              var color = randomColor2(options);
               if (seed !== null) {
-                options2.seed = seed;
+                options.seed = seed;
               }
               colors.push(color);
             }
-            options2.count = totalColors;
+            options.count = totalColors;
             return colors;
           }
-          H = pickHue(options2);
-          S = pickSaturation(H, options2);
-          B = pickBrightness(H, S, options2);
-          return setFormat([H, S, B], options2);
+          H = pickHue(options);
+          S = pickSaturation(H, options);
+          B = pickBrightness(H, S, options);
+          return setFormat([H, S, B], options);
         };
-        function pickHue(options2) {
+        function pickHue(options) {
           if (colorRanges.length > 0) {
-            var hueRange = getRealHueRange(options2.hue);
+            var hueRange = getRealHueRange(options.hue);
             var hue = randomWithin(hueRange);
             var step = (hueRange[1] - hueRange[0]) / colorRanges.length;
             var j = parseInt((hue - hueRange[0]) / step);
@@ -97,7 +97,7 @@
             }
             return hue;
           } else {
-            var hueRange = getHueRange(options2.hue);
+            var hueRange = getHueRange(options.hue);
             hue = randomWithin(hueRange);
             if (hue < 0) {
               hue = 360 + hue;
@@ -105,16 +105,16 @@
             return hue;
           }
         }
-        function pickSaturation(hue, options2) {
-          if (options2.hue === "monochrome") {
+        function pickSaturation(hue, options) {
+          if (options.hue === "monochrome") {
             return 0;
           }
-          if (options2.luminosity === "random") {
+          if (options.luminosity === "random") {
             return randomWithin([0, 100]);
           }
           var saturationRange = getSaturationRange(hue);
           var sMin = saturationRange[0], sMax = saturationRange[1];
-          switch (options2.luminosity) {
+          switch (options.luminosity) {
             case "bright":
               sMin = 55;
               break;
@@ -127,9 +127,9 @@
           }
           return randomWithin([sMin, sMax]);
         }
-        function pickBrightness(H, S, options2) {
+        function pickBrightness(H, S, options) {
           var bMin = getMinimumBrightness(H, S), bMax = 100;
-          switch (options2.luminosity) {
+          switch (options.luminosity) {
             case "dark":
               bMax = bMin + 20;
               break;
@@ -143,8 +143,8 @@
           }
           return randomWithin([bMin, bMax]);
         }
-        function setFormat(hsv, options2) {
-          switch (options2.format) {
+        function setFormat(hsv, options) {
+          switch (options.format) {
             case "hsvArray":
               return hsv;
             case "hslArray":
@@ -154,7 +154,7 @@
               return "hsl(" + hsl[0] + ", " + hsl[1] + "%, " + hsl[2] + "%)";
             case "hsla":
               var hslColor = HSVtoHSL(hsv);
-              var alpha = options2.alpha || Math.random();
+              var alpha = options.alpha || Math.random();
               return "hsla(" + hslColor[0] + ", " + hslColor[1] + "%, " + hslColor[2] + "%, " + alpha + ")";
             case "rgbArray":
               return HSVtoRGB(hsv);
@@ -163,7 +163,7 @@
               return "rgb(" + rgb.join(", ") + ")";
             case "rgba":
               var rgbColor = HSVtoRGB(hsv);
-              var alpha = options2.alpha || Math.random();
+              var alpha = options.alpha || Math.random();
               return "rgba(" + rgbColor.join(", ") + ", " + alpha + ")";
             default:
               return HSVtoHex(hsv);
@@ -414,34 +414,14 @@
   };
 
   // src/index.js
-  var spinner = document.getElementById("spinner");
   var spinnerCenter = document.getElementById("spinner-center");
-  var numOfSegments = 3;
-  var options = [
-    { title: "Ellis", color: (0, import_randomcolor.default)() },
-    { title: "Corey", color: (0, import_randomcolor.default)() },
-    { title: "Waldo", color: (0, import_randomcolor.default)() },
-    { title: "Pip", color: (0, import_randomcolor.default)() },
-    { title: "Polar", color: (0, import_randomcolor.default)() }
-  ].slice(0, numOfSegments);
   var currentAngle = 0;
-  var setup = () => {
-    spinnerCenter.addEventListener("click", () => {
-      const rotation = Math.random() * 1e4;
-      currentAngle -= rotation;
-      const winner = logic_default(Math.abs(currentAngle), options);
-      setTimeout(() => {
-        alert(winner);
-      }, 5e3);
-      spinner.style.transform = `rotate(${currentAngle}deg)`;
-    });
-  };
-  setup();
   var SelectionSpinner = class {
     angle;
     coord;
     constructor() {
       this.segments = [];
+      this.spinner = document.getElementById("spinner");
     }
     addSegment(title) {
       const entry = {
@@ -451,13 +431,25 @@
       this.segments.push(entry);
       this.angle = calculateAngle(this.segments.length);
       this.coord = calculateEndCoords(this.angle);
-      this.redraw();
+      this.draw();
     }
-    removeSegment() {
-      this.angle = calculateAngle(this.numOfSegments - 1);
-      this.endCoord = calculateEndCoords(this.angle);
+    removeSegment(title) {
+      this.segments = this.segments.filter((segment) => segment.title !== title);
+      this.angle = calculateAngle(this.segments.length);
+      this.coord = calculateEndCoords(this.angle);
+      this.draw();
     }
-    redraw() {
+    spin() {
+      const rotation = Math.random() * 1e4;
+      currentAngle -= rotation;
+      const winner = logic_default(Math.abs(currentAngle), this.segments);
+      setTimeout(() => {
+        alert(winner);
+      }, 5e3);
+      this.spinner.style.transform = `rotate(${currentAngle}deg)`;
+    }
+    draw() {
+      this.spinner.innerHTML = "";
       for (let segNum = 0; segNum < this.segments.length; segNum += 1) {
         const segment = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -466,7 +458,7 @@
         text.style.transform = `rotate(${-90}deg)`;
         text.setAttribute("x", "48");
         text.setAttribute("y", "25");
-        text.textContent = options[segNum].title;
+        text.textContent = this.segments[segNum].title;
         text.setAttribute("id", "segment-text");
         segment.appendChild(path);
         segment.appendChild(text);
@@ -474,12 +466,19 @@
         segment.setAttribute("viewBox", "0 0 100 100");
         segment.style.transform = `rotate(${90 + this.angle * segNum}deg)`;
         segment.style.fill = this.segments[segNum].color;
-        spinner.appendChild(segment);
+        this.spinner.appendChild(segment);
       }
     }
   };
   var selectionSpinner = new SelectionSpinner();
-  for (let optionNum = 0; optionNum < options.length; optionNum += 1) {
-    selectionSpinner.addSegment(options[optionNum].title);
+  var titles = window.location.search.split("=")[1].split(",");
+  for (let i = 0; i < titles.length; i += 1) {
+    selectionSpinner.addSegment(titles[i]);
   }
+  var setup = () => {
+    spinnerCenter.addEventListener("click", () => {
+      selectionSpinner.spin();
+    });
+  };
+  setup();
 })();
