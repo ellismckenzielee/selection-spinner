@@ -397,10 +397,10 @@
 
   // src/utils/arcs.js
   var calculateAngle = (numberOfSegments) => Math.floor(360 / numberOfSegments * 100) / 100;
-  var calculateEndCoords = (angle2) => {
+  var calculateEndCoords = (angle) => {
     const radius = 45;
-    const x = 50 + radius * Math.sin(Math.PI * (angle2 / 180));
-    const y = 50 - radius * Math.cos(Math.PI * (angle2 / 180));
+    const x = 50 + radius * Math.sin(Math.PI * (angle / 180));
+    const y = 50 - radius * Math.cos(Math.PI * (angle / 180));
     return {
       x: Math.round(x * 100) / 100,
       y: Math.round(y * 100) / 100
@@ -408,15 +408,15 @@
   };
 
   // src/utils/logic.js
-  var logic_default = (angle2, choices) => {
-    const normalised = Math.floor(angle2 % 360 / 360 * choices.length);
+  var logic_default = (angle, choices) => {
+    const normalised = Math.floor(angle % 360 / 360 * choices.length);
     return choices[normalised].title;
   };
 
   // src/index.js
   var spinner = document.getElementById("spinner");
   var spinnerCenter = document.getElementById("spinner-center");
-  var numOfSegments = 5;
+  var numOfSegments = 3;
   var options = [
     { title: "Ellis", color: (0, import_randomcolor.default)() },
     { title: "Corey", color: (0, import_randomcolor.default)() },
@@ -437,27 +437,49 @@
     });
   };
   setup();
-  var addSegments = (angle2, coord) => {
-    for (let segNum = 0; segNum < numOfSegments; segNum += 1) {
-      const segment = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      path.setAttribute("d", `M 50,50 L 50,5 A45,45 1 0,1 ${coord.x},${coord.y} z`);
-      text.style.transform = `rotate(${-90}deg)`;
-      text.setAttribute("x", "48");
-      text.setAttribute("y", "25");
-      text.textContent = options[segNum].title;
-      text.setAttribute("id", "segment-text");
-      segment.appendChild(path);
-      segment.appendChild(text);
-      segment.setAttribute("id", "segment");
-      segment.setAttribute("viewBox", "0 0 100 100");
-      segment.style.transform = `rotate(${90 + angle2 * segNum}deg)`;
-      segment.style.fill = options[segNum].color;
-      spinner.appendChild(segment);
+  var SelectionSpinner = class {
+    angle;
+    coord;
+    constructor() {
+      this.segments = [];
+    }
+    addSegment(title) {
+      const entry = {
+        title,
+        color: (0, import_randomcolor.default)()
+      };
+      this.segments.push(entry);
+      this.angle = calculateAngle(this.segments.length);
+      this.coord = calculateEndCoords(this.angle);
+      this.redraw();
+    }
+    removeSegment() {
+      this.angle = calculateAngle(this.numOfSegments - 1);
+      this.endCoord = calculateEndCoords(this.angle);
+    }
+    redraw() {
+      for (let segNum = 0; segNum < this.segments.length; segNum += 1) {
+        const segment = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        path.setAttribute("d", `M 50,50 L 50,5 A45,45 1 0,1 ${this.coord.x},${this.coord.y} z`);
+        text.style.transform = `rotate(${-90}deg)`;
+        text.setAttribute("x", "48");
+        text.setAttribute("y", "25");
+        text.textContent = options[segNum].title;
+        text.setAttribute("id", "segment-text");
+        segment.appendChild(path);
+        segment.appendChild(text);
+        segment.setAttribute("id", "segment");
+        segment.setAttribute("viewBox", "0 0 100 100");
+        segment.style.transform = `rotate(${90 + this.angle * segNum}deg)`;
+        segment.style.fill = this.segments[segNum].color;
+        spinner.appendChild(segment);
+      }
     }
   };
-  var angle = calculateAngle(numOfSegments);
-  var endCoord = calculateEndCoords(angle);
-  addSegments(angle, endCoord);
+  var selectionSpinner = new SelectionSpinner();
+  for (let optionNum = 0; optionNum < options.length; optionNum += 1) {
+    selectionSpinner.addSegment(options[optionNum].title);
+  }
 })();
