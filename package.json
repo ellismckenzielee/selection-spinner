@@ -7,6 +7,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "randomcolor": "^0.6.2",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
@@ -26,6 +27,5 @@
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "build": "esbuild src/index.js --bundle --outfile=src/build/out.js",
     "watch": "esbuild src/index.js --bundle --outfile=src/build/out.js --watch"
-
   }
 }
