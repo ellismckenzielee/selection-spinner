@@ -14,6 +14,7 @@
   // src/utils/logic.js
   var logic_default = (angle2, choices) => {
     const normalised = Math.floor(angle2 % 360 / 360 * choices.length);
+    console.log(angle2, choices, normalised);
     return choices[normalised];
   };
 
@@ -21,7 +22,7 @@
   var spinner = document.getElementById("spinner");
   var spinnerCenter = document.getElementById("spinner-center");
   var rotation = 10;
-  var numOfSegments = 4;
+  var numOfSegments = 5;
   var options = [
     "Ellis",
     "Corey",
@@ -34,8 +35,7 @@
     spinnerCenter.addEventListener("click", () => {
       const newRotation = rotation + 10;
       rotation = newRotation;
-      console.log(rotation);
-      const winner = logic_default(rotation, options);
+      const winner = logic_default(rotation, options.slice().reverse());
       console.log(winner);
       spinner.style.transform = `rotate(${newRotation}deg)`;
     });
@@ -58,9 +58,9 @@
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
       path.setAttribute("d", `M 50,50 L 50,5 A45,45 1 0,1 ${coord.x},${coord.y} z`);
-      text.setAttribute("x", "-90");
-      text.setAttribute("y", "-48");
-      text.style.transform = `rotate(-${angle2}deg)`;
+      text.setAttribute("x", "48");
+      text.setAttribute("y", "25");
+      text.style.transform = `rotate(${-90}deg)`;
       text.textContent = options[segNum];
       text.setAttribute("id", "segment-text");
       segment.appendChild(path);
@@ -73,6 +73,7 @@
     }
   };
   var angle = calculateAngle(numOfSegments);
+  console.log(angle);
   var endCoord = calculateEndCoords(angle);
   addSegments(angle, endCoord);
 })();

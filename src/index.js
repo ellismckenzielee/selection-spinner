@@ -6,7 +6,7 @@ const spinnerCenter = document.getElementById('spinner-center');
 
 let rotation = 10;
 
-const numOfSegments = 4;
+const numOfSegments = 5;
 
 const options = [
   'Ellis',
@@ -21,8 +21,7 @@ const setup = () => {
   spinnerCenter.addEventListener('click', () => {
     const newRotation = rotation + 10;
     rotation = newRotation;
-    console.log(rotation);
-    const winner = getWinner(rotation, options);
+    const winner = getWinner(rotation, options.slice().reverse());
     console.log(winner);
     spinner.style.transform = `rotate(${newRotation}deg)`;
   });
@@ -48,9 +47,9 @@ const addSegments = (angle, coord) => {
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     path.setAttribute('d', `M 50,50 L 50,5 A45,45 1 0,1 ${coord.x},${coord.y} z`);
-    text.setAttribute('x', '-90');
-    text.setAttribute('y', '-48');
-    text.style.transform = `rotate(-${angle}deg)`;
+    text.setAttribute('x', '48');
+    text.setAttribute('y', '25');
+    text.style.transform = `rotate(${-90}deg)`;
     text.textContent = options[segNum];
     text.setAttribute('id', 'segment-text');
     segment.appendChild(path);
@@ -64,5 +63,6 @@ const addSegments = (angle, coord) => {
 };
 
 const angle = calculateAngle(numOfSegments);
+console.log(angle);
 const endCoord = calculateEndCoords(angle);
 addSegments(angle, endCoord);
