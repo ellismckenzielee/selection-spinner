@@ -4,7 +4,7 @@ import getWinner from './utils/logic';
 const spinner = document.getElementById('spinner');
 const spinnerCenter = document.getElementById('spinner-center');
 
-const numOfSegments = 5;
+const numOfSegments = 2;
 
 const options = [
   'Ellis',
@@ -21,7 +21,7 @@ console.log(currentAngle, currentSelection);
 
 const setup = () => {
   spinnerCenter.addEventListener('click', () => {
-    const rotation = 10;
+    const rotation = Math.random() * 1000;
     currentAngle -= rotation;
     const winner = getWinner(Math.abs(currentAngle), options);
     console.log(currentAngle, winner);

@@ -21,7 +21,7 @@
   // src/index.js
   var spinner = document.getElementById("spinner");
   var spinnerCenter = document.getElementById("spinner-center");
-  var numOfSegments = 5;
+  var numOfSegments = 2;
   var options = [
     "Ellis",
     "Corey",
@@ -35,7 +35,7 @@
   console.log(currentAngle, currentSelection);
   var setup = () => {
     spinnerCenter.addEventListener("click", () => {
-      const rotation = 10;
+      const rotation = Math.random() * 1e3;
       currentAngle -= rotation;
       const winner = logic_default(Math.abs(currentAngle), options);
       console.log(currentAngle, winner);
