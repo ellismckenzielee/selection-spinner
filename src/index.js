@@ -4,8 +4,6 @@ import getWinner from './utils/logic';
 const spinner = document.getElementById('spinner');
 const spinnerCenter = document.getElementById('spinner-center');
 
-let rotation = 10;
-
 const numOfSegments = 5;
 
 const options = [
@@ -17,13 +15,17 @@ const options = [
   'Skye',
 ].slice(0, numOfSegments);
 
+let currentAngle = 0;
+const currentSelection = getWinner(currentAngle, options);
+console.log(currentAngle, currentSelection);
+
 const setup = () => {
   spinnerCenter.addEventListener('click', () => {
-    const newRotation = rotation + 10;
-    rotation = newRotation;
-    const winner = getWinner(rotation, options.slice().reverse());
-    console.log(winner);
-    spinner.style.transform = `rotate(${newRotation}deg)`;
+    const rotation = 10;
+    currentAngle -= rotation;
+    const winner = getWinner(Math.abs(currentAngle), options);
+    console.log(currentAngle, winner);
+    spinner.style.transform = `rotate(${currentAngle}deg)`;
   });
 };
 
@@ -56,7 +58,7 @@ const addSegments = (angle, coord) => {
     segment.appendChild(text);
     segment.setAttribute('id', 'segment');
     segment.setAttribute('viewBox', '0 0 100 100');
-    segment.style.transform = `rotate(${angle * segNum}deg)`;
+    segment.style.transform = `rotate(${90 + (angle * segNum)}deg)`;
     segment.style.fill = colours[segNum];
     spinner.appendChild(segment);
   }

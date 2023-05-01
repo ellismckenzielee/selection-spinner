@@ -21,7 +21,6 @@
   // src/index.js
   var spinner = document.getElementById("spinner");
   var spinnerCenter = document.getElementById("spinner-center");
-  var rotation = 10;
   var numOfSegments = 5;
   var options = [
     "Ellis",
@@ -31,13 +30,16 @@
     "Polar",
     "Skye"
   ].slice(0, numOfSegments);
+  var currentAngle = 0;
+  var currentSelection = logic_default(currentAngle, options);
+  console.log(currentAngle, currentSelection);
   var setup = () => {
     spinnerCenter.addEventListener("click", () => {
-      const newRotation = rotation + 10;
-      rotation = newRotation;
-      const winner = logic_default(rotation, options.slice().reverse());
-      console.log(winner);
-      spinner.style.transform = `rotate(${newRotation}deg)`;
+      const rotation = 10;
+      currentAngle -= rotation;
+      const winner = logic_default(Math.abs(currentAngle), options);
+      console.log(currentAngle, winner);
+      spinner.style.transform = `rotate(${currentAngle}deg)`;
     });
   };
   setup();
@@ -67,7 +69,7 @@
       segment.appendChild(text);
       segment.setAttribute("id", "segment");
       segment.setAttribute("viewBox", "0 0 100 100");
-      segment.style.transform = `rotate(${angle2 * segNum}deg)`;
+      segment.style.transform = `rotate(${90 + angle2 * segNum}deg)`;
       segment.style.fill = colours[segNum];
       spinner.appendChild(segment);
     }
