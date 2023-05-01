@@ -1,11 +1,12 @@
 import { calculateAngle, calculateEndCoords } from '../utils/arcs';
+import getWinner from '../utils/logic';
 
 describe('testing spinner functions', () => {
   test('trivial test - is jest running?', () => {
     expect(true).toBe(true);
   });
   describe('testing arc functions', () => {
-    describe('calculate angle', () => {
+    describe('calculateAngle', () => {
       test('returns a number', () => {
         const numberOfSegments = 1;
         const expectedType = 'number';
@@ -108,6 +109,62 @@ describe('testing spinner functions', () => {
         };
         const result = calculateEndCoords(angle);
         expect(result).toMatchObject(expectedCoordinates);
+      });
+    });
+  });
+  describe('testing logic functions', () => {
+    describe('getWinner', () => {
+      test('should return a string', () => {
+        const angle = 90;
+        const choices = ['Waldo'];
+        const expectedType = 'string';
+        expect(expectedType).toBe(typeof getWinner(angle, choices));
+      });
+      test('should return correct option for single choice', () => {
+        const angle = 90;
+        const choices = ['Waldo'];
+        const expectedWinner = 'Waldo';
+        const actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+      });
+      test('should return correct option for multiple choices (angle < 180deg)', () => {
+        const angle = 75;
+        const choices = ['Waldo', 'Pip'];
+        const expectedWinner = 'Waldo';
+        const actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+      });
+      test('should return correct option for multiple choices (angle > 180deg)', () => {
+        const angle = 190;
+        const choices = ['Waldo', 'Pip'];
+        const expectedWinner = 'Pip';
+        const actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+      });
+      test('should return correct option for multiple choices (various angles)', () => {
+        let angle = 10;
+        let choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        let expectedWinner = 'Waldo';
+        let actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+
+        angle = 100;
+        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        expectedWinner = 'Pip';
+        actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+
+        angle = 180;
+        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        expectedWinner = 'Polar';
+        actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
+
+        angle = 300;
+        choices = ['Waldo', 'Pip', 'Polar', 'Skye'];
+        expectedWinner = 'Skye';
+        actualWinner = getWinner(angle, choices);
+        expect(expectedWinner).toBe(actualWinner);
       });
     });
   });

@@ -27,6 +27,13 @@ const colours = [
   'lightgray',
 ];
 
+// const options = [
+//   'Ellis',
+//   'Corey',
+//   'Waldo',
+//   'Pip',
+// ];
+
 const numOfSegments = 7;
 
 const addSegments = (angle, coord) => {
