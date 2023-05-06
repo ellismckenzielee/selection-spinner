@@ -4,6 +4,8 @@
 
 Throughout my current project my team has been using a spinner to decide who runs the daily standup. It got me wondering how I might be able to implement one myself - I haven't used vanilla CSS for a while so and thought it would be an interesting challenge! 
 
+![alt text](src/spinner.png "selection spinner screenshot")
+
 ## Tools
 - vanilla JS
 - HTML/CSS
