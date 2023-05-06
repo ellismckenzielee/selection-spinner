@@ -1,6 +1,6 @@
 body {
-  background-color: teal;
   box-sizing: border-box;
+  border: 10px solid black;
   height: 100vh;
   margin: 0;
   overflow: hidden;
@@ -12,14 +12,17 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'courier new';
+
 }
 
 .spinner-container {
   width: 40%;
   position: relative;
   padding-bottom: 40%;
+  border: 2px solid black;
+  border-radius: 50%;
 }
-
 
 #spinner {
   position: absolute;
@@ -47,14 +50,12 @@ main {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
 }
 
 #spinner-center:hover {
   width: 10.5%;
   height: 10.5%;
   font-weight: bold;
-
 }
 
 
@@ -66,7 +67,6 @@ main {
 }
 
 #segment-text {
-  font-family: arial;
   font-size: 8px;
   fill: black;
   transform-origin: center;
@@ -88,7 +88,6 @@ main {
 
 #spin-text {
   color: white;
-
 }
 
 
