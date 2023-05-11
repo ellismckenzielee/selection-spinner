@@ -2,34 +2,17 @@ import randomColor from 'randomcolor';
 import { calculateAngle, calculateEndCoords } from './utils/arcs';
 import getWinner from './utils/logic';
 
-class SelectionSpinner {
+class Spinner {
   angle;
 
   coord;
 
-  constructor() {
-    this.segments = [];
+  constructor(titles) {
     this.spinner = document.getElementById('spinner');
+    this.segments = titles.map((title) => ({ title, color: randomColor() }));
     this.currentAngle = 0;
-  }
-
-  addSegment(title) {
-    const entry = {
-      title,
-      color: randomColor(),
-    };
-
-    this.segments.push(entry);
     this.angle = calculateAngle(this.segments.length);
     this.coord = calculateEndCoords(this.angle);
-    this.draw();
-  }
-
-  removeSegment(title) {
-    this.segments = this.segments.filter((segment) => segment.title !== title);
-    this.angle = calculateAngle(this.segments.length);
-    this.coord = calculateEndCoords(this.angle);
-    this.draw();
   }
 
   spin() {
@@ -71,23 +54,19 @@ const getTitlesFromQueryParams = () => {
   try {
     return window.location.search.split('=')[1].split(',');
   } catch {
-    console.log('No segment titles in query params.');
+    console.log('no segment titles in query params.');
     return [];
   }
 };
 
-const selectionSpinner = new SelectionSpinner();
-
 const setup = () => {
-  const titles = getTitlesFromQueryParams();
-  if (titles.length) {
+  const spinner = new Spinner(getTitlesFromQueryParams());
+  spinner.draw();
+  if (spinner.segments.length) {
     const spinnerCenter = document.getElementById('spinner-center');
     spinnerCenter.addEventListener('click', () => {
-      selectionSpinner.spin();
+      spinner.spin();
     });
-    for (let i = 0; i < titles.length; i += 1) {
-      selectionSpinner.addSegment(titles[i]);
-    }
   } else {
     alert('add items to the spinner using query params');
   }
