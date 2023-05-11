@@ -17,11 +17,8 @@ class Spinner {
 
   spin() {
     this.currentAngle -= Math.random() * 10000;
-    const winner = getWinner(Math.abs(this.currentAngle), this.segments);
-    setTimeout(() => {
-      alert(winner);
-    }, 5100);
     this.spinner.style.transform = `rotate(${this.currentAngle}deg)`;
+    return getWinner(Math.abs(this.currentAngle), this.segments);
   }
 
   draw() {
@@ -59,13 +56,19 @@ const getTitlesFromQueryParams = () => {
   }
 };
 
+const showWinner = (winner) => {
+  setTimeout(() => {
+    alert(winner);
+  }, 5100);
+};
+
 const setup = () => {
   const spinner = new Spinner(getTitlesFromQueryParams());
+  const spinnerCenter = document.getElementById('spinner-center');
   spinner.draw();
   if (spinner.segments.length) {
-    const spinnerCenter = document.getElementById('spinner-center');
     spinnerCenter.addEventListener('click', () => {
-      spinner.spin();
+      showWinner(spinner.spin());
     });
   } else {
     alert('add items to the spinner using query params');

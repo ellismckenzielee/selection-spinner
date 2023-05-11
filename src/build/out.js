@@ -426,11 +426,8 @@
     }
     spin() {
       this.currentAngle -= Math.random() * 1e4;
-      const winner = logic_default(Math.abs(this.currentAngle), this.segments);
-      setTimeout(() => {
-        alert(winner);
-      }, 5100);
       this.spinner.style.transform = `rotate(${this.currentAngle}deg)`;
+      return logic_default(Math.abs(this.currentAngle), this.segments);
     }
     draw() {
       this.spinner.innerHTML = "";
@@ -462,13 +459,18 @@
       return [];
     }
   };
+  var showWinner = (winner) => {
+    setTimeout(() => {
+      alert(winner);
+    }, 5100);
+  };
   var setup = () => {
     const spinner = new Spinner(getTitlesFromQueryParams());
+    const spinnerCenter = document.getElementById("spinner-center");
     spinner.draw();
     if (spinner.segments.length) {
-      const spinnerCenter = document.getElementById("spinner-center");
       spinnerCenter.addEventListener("click", () => {
-        spinner.spin();
+        showWinner(spinner.spin());
       });
     } else {
       alert("add items to the spinner using query params");
